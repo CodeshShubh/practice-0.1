@@ -1,4 +1,5 @@
 import { UserModel } from "../model/userModel.js";
+import { sendToken } from "../utils/sendToken.js";
 
 
 export const register = async(req, res, next)=>{
@@ -19,10 +20,7 @@ export const register = async(req, res, next)=>{
     })
 
 
-    res.status(200).json({
-        success:true,
-        user,
-    })
+    sendToken(res, user, "User SuccesFully Created", 201)
 
     
 }

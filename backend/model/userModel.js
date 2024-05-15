@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 
  const schema = new mongoose.Schema({
@@ -18,6 +19,15 @@ import mongoose from "mongoose";
    }
    
 });
+
+
+schema.methods.getJWTToken = function(){
+  return jwt.sign({_id:this._id}, process.env.SECRET_KEY, {
+    expiresIn:"15d",
+  })
+}
+
+
 
 export const UserModel = mongoose.model("UserModel", schema)
 
