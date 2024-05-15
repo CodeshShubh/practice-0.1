@@ -12,10 +12,16 @@ export const register = async(req, res, next)=>{
 
     if(Email) return next("User Already Exist", 409)
      
-    user = await UserModel.create({
+   let user = await UserModel.create({
         name,
         email,
         password
+    })
+
+
+    res.status(200).json({
+        success:true,
+        user,
     })
 
     
